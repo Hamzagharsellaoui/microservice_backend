@@ -4,27 +4,31 @@ services:
     ports:
       - "8080:80"
     environment:
-      - PMA_HOST=mysql
+      PMA_HOST: mysql
     depends_on:
       - mysql
     networks:
-      -  Member-Service-app
+      - member-service-app
+
   mysql:
-    container_name: mysql-Member-Service
     image: mysql:8.0
+    container_name: mysql-member-service
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: Member-Service
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: membre_db
+      MYSQL_USER: membre
+      MYSQL_PASSWORD: membrepass
+      MYSQL_ROOT_HOST: "%"
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - Member-Service-app
+      - member-service-app
     restart: unless-stopped
 
 networks:
-  Member-Service-app:
+  member-service-app:
     driver: bridge
 
 volumes:
