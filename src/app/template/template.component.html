@@ -1,0 +1,93 @@
+<mat-sidenav-container class="app-shell">
+
+  <!-- SIDENAV -->
+  <mat-sidenav #drawer class="app-sidenav"
+               fixedInViewport="true"
+               mode="side"
+               opened="true">
+
+    <div class="brand">
+      <mat-icon class="brand-icon">school</mat-icon>
+      <div class="brand-text">
+        <div class="brand-title">Laboratoire</div>
+        <div class="brand-subtitle">Mini Project</div>
+      </div>
+    </div>
+
+    <mat-nav-list class="nav">
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
+        <mat-icon matListIcon>dashboard</mat-icon>
+        <span matLine>Dashboard</span>
+      </a>
+
+      <a mat-list-item routerLink="/member" routerLinkActive="active-link">
+        <mat-icon matListIcon>supervised_user_circle</mat-icon>
+        <span matLine>Members</span>
+      </a>
+
+      <a mat-list-item routerLink="/tools" routerLinkActive="active-link">
+        <mat-icon matListIcon>settings</mat-icon>
+        <span matLine>Tools</span>
+      </a>
+
+      <a mat-list-item routerLink="/publications" routerLinkActive="active-link">
+        <mat-icon matListIcon>article</mat-icon>
+        <span matLine>Publications</span>
+      </a>
+
+      <a mat-list-item routerLink="/events" routerLinkActive="active-link">
+        <mat-icon matListIcon>event_note</mat-icon>
+        <span matLine>Events</span>
+      </a>
+    </mat-nav-list>
+
+    <div class="sidenav-footer">
+      <mat-divider></mat-divider>
+      <div class="footer-text">© 2026 Lab</div>
+    </div>
+  </mat-sidenav>
+
+  <!-- CONTENT -->
+  <mat-sidenav-content class="app-content">
+
+    <mat-toolbar color="primary" class="app-toolbar">
+      <button mat-icon-button (click)="drawer.toggle()" class="hide-desktop" aria-label="Open menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span class="toolbar-title">Lab</span>
+      <span class="spacer"></span>
+
+      <!-- User Menu -->
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-btn">
+        <div class="user-wrap">
+          <img class="avatar"
+               src="assets/avatar.png"
+               alt="user avatar"
+               onerror="this.style.display='none'"/>
+          <mat-icon class="user-icon">account_circle</mat-icon>
+          <span class="username" fxHide fxShow.gt-sm>Account</span>
+          <mat-icon class="arrow" fxHide.xs>keyboard_arrow_down</mat-icon>
+        </div>
+      </button>
+
+      <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item>
+          <mat-icon>account_box</mat-icon>
+          <span>Profile</span>
+        </button>
+
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <div class="page">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

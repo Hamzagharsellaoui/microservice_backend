@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>
+  {{ isEdit ? 'Edit publication' : 'Create publication' }}
+</h2>
+
+<mat-dialog-content [formGroup]="form" class="dialog-content">
+
+  <!-- Titre -->
+  <mat-form-field appearance="outline" class="w100">
+    <mat-label>Titre</mat-label>
+    <input matInput formControlName="titre" placeholder="Publication title">
+    <mat-error *ngIf="form.get('titre')?.invalid">Title is required</mat-error>
+  </mat-form-field>
+
+  <!-- Type -->
+  <mat-form-field appearance="outline" class="w100">
+    <mat-label>Type</mat-label>
+    <input matInput formControlName="type" placeholder="Journal, Conference, ...">
+    <mat-error *ngIf="form.get('type')?.invalid">Type is required</mat-error>
+  </mat-form-field>
+
+  <!-- Date apparition -->
+  <mat-form-field appearance="outline" class="w100">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="form.get('date')?.invalid">Date is required</mat-error>
+  </mat-form-field>
+
+  <!-- Lien -->
+  <mat-form-field appearance="outline" class="w100">
+    <mat-label>Lien</mat-label>
+    <input matInput formControlName="lien" placeholder="https://...">
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="close()">Cancel</button>
+
+  <button mat-raised-button color="primary"
+          (click)="save()"
+          [disabled]="form.invalid">
+    {{ isEdit ? 'Update' : 'Create' }}
+  </button>
+</mat-dialog-actions>

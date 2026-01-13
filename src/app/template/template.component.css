@@ -1,0 +1,122 @@
+.app-shell {
+  height: 100vh;
+}
+
+.app-sidenav {
+  width: 250px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 16px 14px;
+}
+
+.brand-icon {
+  opacity: 0.95;
+}
+
+.brand-text .brand-title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.brand-text .brand-subtitle {
+  opacity: 0.75;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.nav {
+  padding-top: 6px;
+}
+
+.active-link {
+  background: rgba(255,255,255,0.08);
+  border-left: 3px solid rgba(255,255,255,0.7);
+}
+
+.sidenav-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px;
+}
+
+.footer-text {
+  opacity: 0.7;
+  font-size: 12px;
+  padding-top: 8px;
+}
+
+.app-content {
+  background: rgba(0,0,0,0.03);
+}
+
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.toolbar-title {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-btn {
+  text-transform: none;
+}
+
+.user-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-icon {
+  opacity: 0.95;
+}
+
+.username {
+  margin-left: 4px;
+  opacity: 0.95;
+}
+
+.arrow {
+  opacity: 0.9;
+}
+
+.page {
+  padding: 18px;
+}
+
+@media (max-width: 900px) {
+  .app-sidenav {
+    width: 240px;
+  }
+  .hide-desktop {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 901px) {
+  .hide-desktop {
+    display: none;
+  }
+}

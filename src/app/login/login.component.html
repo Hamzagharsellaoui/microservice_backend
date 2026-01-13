@@ -1,0 +1,74 @@
+<mat-card class="form-card">
+
+  <!-- ===== Header ===== -->
+  <div class="form-header">
+    <div>
+      <h2 class="title">Login</h2>
+      <p class="subtitle">Enter your credentials to continue</p>
+    </div>
+
+
+  </div>
+
+  <!-- ===== Form ===== -->
+  <form (ngSubmit)="login()" class="member-form">
+
+    <div class="grid">
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="span-2">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          required
+        />
+        <mat-error *ngIf="!email">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline" class="span-2">
+        <mat-label>Mot de passe</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          required
+        />
+        <mat-error *ngIf="!password">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <!-- ===== Actions ===== -->
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
+
+      <button
+        mat-stroked-button
+        type="button"
+        routerLink="/"
+      >
+        Cancel
+      </button>
+    </div>
+
+  </form>
+
+</mat-card>

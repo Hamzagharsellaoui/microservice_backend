@@ -1,0 +1,83 @@
+/* ----- LIGNE DES CARDS ----- */
+.cards-row {
+  display: flex;
+  gap: 25px;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+/* ----- CARD ----- */
+.stat-card {
+  flex: 1;
+  padding: 25px;
+  border-radius: 18px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border: 1px solid #eee;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* ----- ICON ----- */
+.stat-icon {
+  font-size: 38px !important;
+  padding: 18px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Couleurs différentes pour chaque card */
+.stat-card:nth-child(1) .stat-icon { background: #3f51b5; }
+.stat-card:nth-child(2) .stat-icon { background: #009688; }
+.stat-card:nth-child(3) .stat-icon { background: #ff9800; }
+.stat-card:nth-child(4) .stat-icon { background: #9c27b0; }
+
+/* ----- TEXTES ----- */
+.stat-number {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  color: #333;
+}
+
+.stat-label {
+  font-size: 15px;
+  margin: 0;
+  opacity: 0.75;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 900px) {
+  .cards-row {
+    flex-direction: column;
+  }
+
+  .stat-card {
+    width: 100%;
+  }
+}
+/* 🔹 Ligne des graphiques */
+.charts-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.chart-wrapper {
+  width: 48%;   /* 2 charts l’un à côté de l’autre */
+  padding: 20px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}

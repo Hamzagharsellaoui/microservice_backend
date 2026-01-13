@@ -1,0 +1,66 @@
+{
+  "members": [
+    {
+      "cin": "12345678",
+      "name": "wiem",
+      "type": "student",
+      "cv": "lien",
+      "createdDate": "2025-04-11",
+      "id": "1",
+      "events": ["222", "555"]
+    },
+    {
+      "cin": "87654321",
+      "name": "yass",
+      "type": "teacher",
+      "cv": "lien",
+      "createdDate": "2025-04-11",
+      "id": "2",
+      "events": ["222"]
+    },
+    {
+      "cin": "87654321",
+      "name": "rahma",
+      "type": "student",
+      "cv": "lien",
+      "createdDate": "2025-04-11",
+      "id": "f31d",
+      "events": ["555"]
+    },
+    {
+      "id": "d1d8",
+      "cin": "87654321",
+      "name": "ali",
+      "type": "teacher",
+      "cv": "lien",
+      "createdDate": "2025-04-11",
+      "events": []
+    },
+    {
+      "id": "4f19",
+      "cin": "87654321",
+      "name": "hamza",
+      "type": "student",
+      "cv": "lien",
+      "createdDate": "2025-04-11",
+      "events": []
+    }
+  ],
+
+  "evnt": [
+    {
+      "id": "222",
+      "name": "event1",
+      "dateDebut": "12/12/2025",
+      "dateFin": "12/12/2025",
+      "lieu": "sfax"
+    },
+    {
+      "id": "555",
+      "name": "rahma",
+      "dateDebut": "2025-11-26T23:00:00.000Z",
+      "dateFin": "2025-11-28T23:00:00.000Z",
+      "lieu": "sfax"
+    }
+  ]
+}

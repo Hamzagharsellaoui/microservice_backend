@@ -1,0 +1,53 @@
+[debug] [2026-01-13T10:05:50.024Z] ----------------------------------------------------------------------
+[debug] [2026-01-13T10:05:50.028Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\LENOVO\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-01-13T10:05:50.028Z] CLI Version:   15.2.1
+[debug] [2026-01-13T10:05:50.028Z] Platform:      win32
+[debug] [2026-01-13T10:05:50.029Z] Node Version:  v20.19.1
+[debug] [2026-01-13T10:05:50.029Z] Time:          Tue Jan 13 2026 11:05:50 GMT+0100 (UTC+01:00)
+[debug] [2026-01-13T10:05:50.029Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\IdeaProjects\angular_projects\lab
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[debug] [2026-01-13T10:05:56.102Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-01-13T10:05:56.103Z] > authorizing via signed-in user (hamza.gharsellaoui@enis.tn)
+[debug] [2026-01-13T10:05:56.105Z] Checked if tokens are valid: true, expires at: 1768302296692
+[debug] [2026-01-13T10:05:56.106Z] Checked if tokens are valid: true, expires at: 1768302296692
+[debug] [2026-01-13T10:05:56.109Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/projet-ang-spring [none]
+[debug] [2026-01-13T10:05:56.576Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/projet-ang-spring 200
+[debug] [2026-01-13T10:05:56.576Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/projet-ang-spring {"projectId":"projet-ang-spring","projectNumber":"660220159272","displayName":"projet-ang-spring","name":"projects/projet-ang-spring","resources":{"hostingSite":"projet-ang-spring"},"state":"ACTIVE","etag":"1_000d6c03-33a1-41a7-b1f3-960a532c085c"}
+[info] i  Using project projet-ang-spring (projet-ang-spring) . 
+[info] 
+=== Hosting Setup
+[debug] [2026-01-13T10:05:56.585Z] Checked if tokens are valid: true, expires at: 1768302296692
+[debug] [2026-01-13T10:05:56.585Z] Checked if tokens are valid: true, expires at: 1768302296692
+[debug] [2026-01-13T10:05:56.586Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/projet-ang-spring [none]
+[debug] [2026-01-13T10:05:56.813Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/projet-ang-spring 200
+[debug] [2026-01-13T10:05:56.813Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/projet-ang-spring {"projectId":"projet-ang-spring","projectNumber":"660220159272","displayName":"projet-ang-spring","name":"projects/projet-ang-spring","resources":{"hostingSite":"projet-ang-spring"},"state":"ACTIVE","etag":"1_000d6c03-33a1-41a7-b1f3-960a532c085c"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] 
+[info] i  Detected a .git folder at D:\IdeaProjects\angular_projects\lab 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=1047802917&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...

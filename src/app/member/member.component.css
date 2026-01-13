@@ -1,0 +1,105 @@
+/* ===== PAGE CARD ===== */
+.page-card {
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ===== TABLE ===== */
+.table-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.custom-table {
+  width: 100%;
+}
+
+/* ===== TABLE HEADER ===== */
+th.mat-header-cell {
+  font-weight: 600;
+  color: #374151;
+  background: #f9fafb;
+}
+
+/* ===== TABLE ROW ===== */
+td.mat-cell {
+  padding: 12px 16px;
+}
+
+/* Hover effect */
+tr.mat-row:hover {
+  background-color: #f3f4f6;
+}
+
+/* ===== NAME CELL ===== */
+.name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  background: #e0e7ff;
+  color: #4338ca;
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 18px;
+}
+
+/* ===== MUTED TEXT ===== */
+.muted {
+  color: #9ca3af;
+}
+
+/* ===== ACTIONS ===== */
+.actions-col {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.actions-col button {
+  margin-left: 4px;
+}
+
+/* ===== ICON COLORS ===== */
+button[color="primary"] mat-icon {
+  color: #2563eb;
+}
+
+button[color="warn"] mat-icon {
+  color: #dc2626;
+}
+
+/* ===== EMPTY STATE ===== */
+.empty {
+  text-align: center;
+  padding: 40px 0;
+  color: #9ca3af;
+}
+
+.empty mat-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}

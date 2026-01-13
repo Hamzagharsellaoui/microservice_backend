@@ -1,0 +1,83 @@
+<mat-card class="page-card">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h2 class="title">Events</h2>
+      <p class="subtitle">Create, edit and manage laboratory events</p>
+    </div>
+
+    <button mat-raised-button color="primary" (click)="openCreate()">
+      <mat-icon>add</mat-icon>
+      Create Event
+    </button>
+
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource" class="custom-table">
+
+      <!-- ID -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID</th>
+        <td mat-cell *matCellDef="let element"> {{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="titre">
+        <th mat-header-cell *matHeaderCellDef> titre</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="name-cell">
+            <mat-icon class="avatar">event</mat-icon>
+            <span>{{ element.titre }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Lieu -->
+      <ng-container matColumnDef="lieu">
+        <th mat-header-cell *matHeaderCellDef> Location</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="muted">{{ element.lieu || '—' }}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.date | date:'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="actions-col"> Actions </th>
+        <td mat-cell *matCellDef="let element" class="actions-col">
+
+          <button mat-icon-button color="primary"
+                  [routerLink]="['/events', element.id, 'details']"
+                  matTooltip="Details">
+            <mat-icon>visibility</mat-icon>
+          </button>
+
+          <button mat-icon-button color="primary" (click)="openEdit(element)" matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="delete(element.id)"
+            matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+ </div>
+
+</mat-card>

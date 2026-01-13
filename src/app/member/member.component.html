@@ -1,0 +1,119 @@
+<mat-card class="page-card">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <h2 class="title">Members</h2>
+      <p class="subtitle">Create, edit and manage laboratory members</p>
+    </div>
+
+    <button mat-raised-button color="primary" routerLink="/create">
+      <mat-icon>person_add</mat-icon>
+      Create Member
+    </button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrapper mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource" class="custom-table">
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID</th>
+        <td mat-cell *matCellDef="let element"> {{ element.id }}</td>
+      </ng-container>
+
+      <!-- CIN Column -->
+      <ng-container matColumnDef="cin">
+        <th mat-header-cell *matHeaderCellDef> CIN</th>
+        <td mat-cell *matCellDef="let element"> {{ element.cin }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="name-cell">
+            <mat-icon class="avatar">person</mat-icon>
+            <span>{{ element.nom }}</span>
+          </div>
+        </td>
+
+      </ng-container>
+
+      <!-- Type Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Type</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip-set>
+            <mat-chip [ngClass]="element.type === 'ETUDIANT' ? 'chip-student' : 'chip-teacher'">
+              {{ element.type }}
+            </mat-chip>
+          </mat-chip-set>
+        </td>
+      </ng-container>
+
+      <!-- CV Column -->
+      <ng-container matColumnDef="cv">
+        <th mat-header-cell *matHeaderCellDef> CV</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="muted">{{ element.cv || '—' }}</span>
+        </td>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef> Created</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.createdDate | date:'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="actions-col"> Actions </th>
+
+        <td mat-cell *matCellDef="let element" class="actions-col">
+
+          <!-- Details -->
+          <button
+            mat-icon-button
+            color="primary"
+            [routerLink]="['/', element.id ,'details']"
+            matTooltip="Details">
+            <mat-icon>visibility</mat-icon>
+          </button>
+
+          <!-- Edit -->
+          <button
+            mat-icon-button
+            [routerLink]="['/' , element.id, 'edit']"
+            matTooltip="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <!-- Delete -->
+          <button
+            mat-icon-button
+            color="warn"
+            (click)="delete(element.id)"
+            matTooltip="Delete">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <!-- Empty state -->
+    <div class="empty" *ngIf="dataSource?.length === 0">
+      <mat-icon>inbox</mat-icon>
+      <p>No members found.</p>
+    </div>
+  </div>
+
+</mat-card>

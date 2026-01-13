@@ -1,0 +1,128 @@
+<mat-card class="form-card">
+
+  <div class="form-header">
+    <div>
+      <h2 class="title">{{ isEdit ? 'Edit Member' : 'Create Member' }}</h2>
+      <p class="subtitle">Fill in the information below</p>
+    </div>
+
+    <button mat-stroked-button type="button" routerLink="/member">
+      <mat-icon>arrow_back</mat-icon>
+      Back
+    </button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="sub()" class="member-form">
+
+    <div class="grid">
+      <mat-form-field appearance="outline">
+        <mat-label>CIN</mat-label>
+        <input matInput formControlName="cin" />
+        <mat-error *ngIf="form.get('cin')?.touched && form.get('cin')?.invalid">
+          CIN is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="ETUDIANT">Étudiant</mat-option>
+          <mat-option value="ENSEIGNANT">Enseignant</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="span-2">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="nom" />
+        <mat-error *ngIf="form.get('nom')?.touched && form.get('nom')?.invalid">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="span-2">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+          Valid email required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <!-- Student -->
+    <div *ngIf="form.get('type')?.value === 'ETUDIANT'" class="section">
+      <h3>Student Information</h3>
+
+      <div class="grid">
+
+        <!-- ✅ NEW: Encadrant -->
+        <mat-form-field appearance="outline" class="span-2">
+          <mat-label>Encadrant (Teacher)</mat-label>
+          <mat-select formControlName="encadrantId">
+            <mat-option *ngFor="let t of teachers" [value]="t.id">
+              {{ t.nom }} — {{ t.email }}
+            </mat-option>
+          </mat-select>
+
+
+          <mat-hint *ngIf="teachers?.length === 0">
+            No teachers found. Create a teacher first.
+          </mat-hint>
+
+          <mat-error *ngIf="form.get('encadrantId')?.touched && form.get('encadrantId')?.hasError('required')">
+            Teacher is required for students
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date inscription</mat-label>
+          <input matInput type="date" formControlName="dateInscription" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Diplôme</mat-label>
+          <input matInput formControlName="diplome" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Teacher -->
+    <div *ngIf="form.get('type')?.value === 'ENSEIGNANT'" class="section">
+      <h3>Teacher Information</h3>
+      <div class="grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Grade</mat-label>
+          <input matInput formControlName="grade" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Établissement</mat-label>
+          <input matInput formControlName="etablissement" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <div class="section">
+      <h3>Documents</h3>
+      <mat-form-field appearance="outline" class="full">
+        <mat-label>CV (link/path)</mat-label>
+        <input matInput formControlName="cv" placeholder="https://..." />
+      </mat-form-field>
+    </div>
+
+    <div class="actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || submitting">
+        <mat-icon>save</mat-icon>
+        {{ isEdit ? 'Update' : 'Create' }}
+      </button>
+
+      <button mat-stroked-button type="button" routerLink="/member">
+        Cancel
+      </button>
+    </div>
+
+  </form>
+</mat-card>

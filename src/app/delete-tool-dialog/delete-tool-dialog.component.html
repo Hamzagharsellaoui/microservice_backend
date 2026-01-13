@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Delete Tool?</h2>
+
+<mat-dialog-content>
+  <p>
+    This action will permanently delete this Tool .
+    <strong>This cannot be undone.</strong>
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="true">
+    <mat-icon>delete</mat-icon>
+    Delete
+  </button>
+</mat-dialog-actions>

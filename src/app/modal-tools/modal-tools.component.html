@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>
+  {{ isEdit ? 'Edit tool' : 'Create tool' }}
+</h2>
+
+<mat-dialog-content [formGroup]="form" class="dialog-content">
+
+  <!-- Source -->
+  <mat-form-field appearance="outline" class="w100">
+    <mat-label>Source</mat-label>
+    <input matInput formControlName="source" placeholder="GitHub, Docker, Jira...">
+    <mat-error *ngIf="form.get('source')?.invalid">
+      Source is required
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Date -->
+  <mat-form-field appearance="outline" class="w100">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+    <mat-error *ngIf="form.get('date')?.invalid">
+      Date is required
+    </mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="close()">Cancel</button>
+
+  <button mat-raised-button
+          color="primary"
+          (click)="save()"
+          [disabled]="form.invalid">
+    {{ isEdit ? 'Update' : 'Create' }}
+  </button>
+</mat-dialog-actions>

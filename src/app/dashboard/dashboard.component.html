@@ -1,0 +1,59 @@
+<!-- ROW 1 - CARDS -->
+<div class="dashboard-row cards-row">
+
+  <mat-card class="stat-card">
+    <mat-icon class="stat-icon">groups</mat-icon>
+    <div class="stat-content">
+      <h2 class="stat-number">{{ Nb_Members }}</h2>
+      <p class="stat-label">Members</p>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-icon class="stat-icon">build</mat-icon>
+    <div class="stat-content">
+      <h2 class="stat-number">{{ Nb_Tools }}</h2>
+      <p class="stat-label">Tools</p>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-icon class="stat-icon">event</mat-icon>
+    <div class="stat-content">
+      <h2 class="stat-number">{{ Nb_Events }}</h2>
+      <p class="stat-label">Events</p>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <mat-icon class="stat-icon">library_books</mat-icon>
+    <div class="stat-content">
+      <h2 class="stat-number">{{ Nb_Publications }}</h2>
+      <p class="stat-label">Publications</p>
+    </div>
+  </mat-card>
+
+</div>
+
+<!-- ROW 2 - CHARTS -->
+<div class="dashboard-row charts-row">
+
+  <!-- PIE CHART -->
+  <div class="chart-wrapper">
+    <canvas baseChart
+            [type]="'pie'"
+            [data]="{ labels: chartLabelsPie, datasets: chartDataPie }"
+            [options]="chartOptionsPie">
+    </canvas>
+  </div>
+
+  <!-- LINE CHART -->
+  <div class="chart-wrapper">
+    <canvas baseChart
+            [type]="'line'"
+            [data]="{ labels: chartLabelsLine, datasets: chartDataLine }"
+            [options]="chartOptionsLine">
+    </canvas>
+  </div>
+
+</div>

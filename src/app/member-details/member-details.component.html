@@ -1,0 +1,286 @@
+<mat-card class="page-card">
+  <div class="top">
+    <div>
+      <h2 class="title">Member Details</h2>
+      <div class="muted">ID: {{ memberId }}</div>
+    </div>
+  </div>
+
+  <mat-card class="info-card" *ngIf="member">
+    <div class="info-grid">
+      <div><b>CIN:</b> {{ member.cin }}</div>
+      <div><b>Name:</b> {{ member.nom || member.name || '—' }}</div>
+      <div><b>Email:</b> {{ member.email || '—' }}</div>
+      <div><b>Type:</b> {{ member.type || '—' }}</div>
+    </div>
+  </mat-card>
+
+  <mat-tab-group>
+
+    <!-- EVENTS -->
+    <mat-tab label="Events">
+      <div class="tab-content">
+
+        <mat-card class="action-card">
+          <h3>Attach existing event</h3>
+          <div class="row">
+            <mat-form-field appearance="outline" class="grow">
+              <mat-label>Event ID</mat-label>
+              <input matInput [formControl]="attachEventId">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="attachEvent()"
+                    [disabled]="attachEventId.invalid">
+              Attach
+            </button>
+          </div>
+        </mat-card>
+
+        <mat-card class="action-card">
+          <h3>Create new event</h3>
+          <form [formGroup]="eventForm" class="grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Titre</mat-label>
+              <input matInput formControlName="titre">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Lieu</mat-label>
+              <input matInput formControlName="lieu">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput [matDatepicker]="evPicker" formControlName="date">
+              <mat-datepicker-toggle matIconSuffix [for]="evPicker"></mat-datepicker-toggle>
+              <mat-datepicker #evPicker></mat-datepicker>
+            </mat-form-field>
+          </form>
+
+          <button mat-raised-button color="primary" (click)="createEvent()" [disabled]="eventForm.invalid">
+            Create
+          </button>
+        </mat-card>
+
+        <mat-card class="list-card">
+          <h3>Events list</h3>
+
+          <table mat-table [dataSource]="events" class="w100">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let e">{{ e.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="titre">
+              <th mat-header-cell *matHeaderCellDef>Titre</th>
+              <td mat-cell *matCellDef="let e">{{ e.titre }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let e">{{ e.date | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="lieu">
+              <th mat-header-cell *matHeaderCellDef>Lieu</th>
+              <td mat-cell *matCellDef="let e">{{ e.lieu }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let e" class="right">
+                <button mat-icon-button color="warn" (click)="deleteEvent(e.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['id','titre','date','lieu','actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['id','titre','date','lieu','actions'];"></tr>
+          </table>
+
+          <div class="empty" *ngIf="events?.length === 0">
+            <mat-icon>event_busy</mat-icon>
+            <p>No events.</p>
+          </div>
+        </mat-card>
+
+      </div>
+    </mat-tab>
+
+    <!-- TOOLS -->
+    <mat-tab label="Tools">
+      <div class="tab-content">
+
+        <mat-card class="action-card">
+          <h3>Attach existing tool</h3>
+          <div class="row">
+            <mat-form-field appearance="outline" class="grow">
+              <mat-label>Tool ID</mat-label>
+              <input matInput [formControl]="attachOutilId">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="attachOutil()"
+                    [disabled]="attachOutilId.invalid">
+              Attach
+            </button>
+          </div>
+        </mat-card>
+
+        <mat-card class="action-card">
+          <h3>Create new tool</h3>
+          <form [formGroup]="outilForm" class="grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Source</mat-label>
+              <input matInput formControlName="source">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput [matDatepicker]="toolPicker" formControlName="date">
+              <mat-datepicker-toggle matIconSuffix [for]="toolPicker"></mat-datepicker-toggle>
+              <mat-datepicker #toolPicker></mat-datepicker>
+            </mat-form-field>
+          </form>
+
+          <button mat-raised-button color="primary" (click)="createOutil()" [disabled]="outilForm.invalid">
+            Create
+          </button>
+        </mat-card>
+
+        <mat-card class="list-card">
+          <h3>Tools list</h3>
+
+          <table mat-table [dataSource]="outils" class="w100">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let o">{{ o.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="source">
+              <th mat-header-cell *matHeaderCellDef>Source</th>
+              <td mat-cell *matCellDef="let o">{{ o.source }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let o">{{ o.date | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let o" class="right">
+                <button mat-icon-button color="warn" (click)="deleteOutil(o.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['id','source','date','actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['id','source','date','actions'];"></tr>
+          </table>
+
+          <div class="empty" *ngIf="outils?.length === 0">
+            <mat-icon>build</mat-icon>
+            <p>No tools.</p>
+          </div>
+        </mat-card>
+
+      </div>
+    </mat-tab>
+
+    <!-- PUBLICATIONS -->
+    <mat-tab label="Publications">
+      <div class="tab-content">
+
+        <mat-card class="action-card">
+          <h3>Attach existing publication</h3>
+          <div class="row">
+            <mat-form-field appearance="outline" class="grow">
+              <mat-label>Publication ID</mat-label>
+              <input matInput [formControl]="attachPubId">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="attachPublication()"
+                    [disabled]="attachPubId.invalid">
+              Attach
+            </button>
+          </div>
+        </mat-card>
+
+        <mat-card class="action-card">
+          <h3>Create new publication</h3>
+          <form [formGroup]="pubForm" class="grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Titre</mat-label>
+              <input matInput formControlName="titre">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <input matInput formControlName="type">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date apparition</mat-label>
+              <input matInput [matDatepicker]="pubPicker" formControlName="dateApparition">
+              <mat-datepicker-toggle matIconSuffix [for]="pubPicker"></mat-datepicker-toggle>
+              <mat-datepicker #pubPicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Lien</mat-label>
+              <input matInput formControlName="lien">
+            </mat-form-field>
+          </form>
+
+          <button mat-raised-button color="primary" (click)="createPublication()" [disabled]="pubForm.invalid">
+            Create
+          </button>
+        </mat-card>
+
+        <mat-card class="list-card">
+          <h3>Publications list</h3>
+
+          <table mat-table [dataSource]="pubs" class="w100">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>ID</th>
+              <td mat-cell *matCellDef="let p">{{ p.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="titre">
+              <th mat-header-cell *matHeaderCellDef>Titre</th>
+              <td mat-cell *matCellDef="let p">{{ p.titre }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef>Type</th>
+              <td mat-cell *matCellDef="let p">{{ p.type }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateApparition">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let p">{{ p.dateApparition | date:'dd/MM/yyyy' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let p" class="right">
+                <button mat-icon-button color="warn" (click)="deletePublication(p.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['id','titre','type','dateApparition','actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['id','titre','type','dateApparition','actions'];"></tr>
+          </table>
+
+          <div class="empty" *ngIf="pubs?.length === 0">
+            <mat-icon>article</mat-icon>
+            <p>No publications.</p>
+          </div>
+        </mat-card>
+
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</mat-card>
