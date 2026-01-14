@@ -29,7 +29,7 @@ public class OutilImpl implements IOutilService {
 	}
 
 	public Outil findOutil(Long id) {
-		Outil p = (Outil) outilRepository.findById(id).get();
+		Outil p = outilRepository.findById(id).get();
 		return p;
 	}
 

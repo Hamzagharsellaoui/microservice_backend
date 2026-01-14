@@ -3,11 +3,7 @@ package com.example.demo.entity;
 import java.util.Date;
 
 import io.micrometer.common.lang.NonNull;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,10 +25,13 @@ public class Etudiant extends Membre {
 	@ManyToOne
 	private EnseignantChercheur encadrant;
 
+	@Transient
+	private Long encadrantId;
+
 	@Builder
 	public Etudiant(Long id, String cin, String nom, String prenom, Date dateNaissance, byte[] photo, String cv,
 			String email, String password, Date dateInscription, String diplome, EnseignantChercheur encadrant) {
-		super(id, cin, nom, prenom, dateNaissance, photo, cv, email, password, "etd", null, null, null);
+		super(id, cin, nom, prenom, dateNaissance, photo, cv, email, password, "etd", null, null,null);
 		this.dateInscription = dateInscription;
 		this.diplome = diplome;
 		this.encadrant = encadrant;

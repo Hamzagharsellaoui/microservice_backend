@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +26,14 @@ public class MembreOutilController {
 	@GetMapping(value = "/membres/{m_id}/outils/{o_id}")
 	public Membre affecterOutil(@PathVariable(name = "m_id") Long m_id, @PathVariable(name = "o_id") Long o_id) {
 		membreOutilService.affectOutilToAuteur(m_id, o_id);
-		Membre mbr = membreService.findMembre(m_id);
-		mbr.setOutils(membreOutilService.findAllOutilparauteur(m_id));
-		return mbr;
+		Optional<Membre> mbr = membreService.findMembre(m_id);
+		mbr.get().setOutils(membreOutilService.findAllOutilparauteur(m_id));
+		return mbr.get();
 	}
 	
 	@GetMapping(value = "/membres/{id}/outils")
-	public List<OutilBean> findOutils(@PathVariable Long idauteur) {
-		return membreOutilService.findAllOutilparauteur(idauteur);
+	public List<OutilBean> findOutils(@PathVariable Long id) {
+		return membreOutilService.findAllOutilparauteur(id);
 	}
 	
 	@PostMapping(value = "/membres/{id}/outils")

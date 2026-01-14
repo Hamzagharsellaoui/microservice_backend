@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,9 @@ public class MembreEventController {
 	@GetMapping(value = "/membres/{m_id}/events/{e_id}")
 	public Membre affecterEvent(@PathVariable(name = "m_id") Long m_id, @PathVariable(name = "e_id") Long e_id) {
 		membreEventService.affectEventToAuteur(m_id, e_id);
-		Membre mbr = membreService.findMembre(m_id);
-		mbr.setEvents(membreEventService.findAllEventparauteur(m_id));
-		return mbr;
+		Optional<Membre> mbr = membreService.findMembre(m_id);
+		mbr.get().setEvents(membreEventService.findAllEventparauteur(m_id));
+		return mbr.get();
 	}
 	
 	@GetMapping(value = "/membres/{id}/events")

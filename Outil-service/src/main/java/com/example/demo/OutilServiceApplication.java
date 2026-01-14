@@ -13,24 +13,9 @@ import com.example.demo.service.IOutilService;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class OutilServiceApplication implements CommandLineRunner {
+public class OutilServiceApplication{
 
-	@Autowired
-	IOutilService outilService;
-	
 	public static void main(String[] args) {
 		SpringApplication.run(OutilServiceApplication.class, args);
 	}
-
-	@Override
-	public void run(String... args) throws Exception {
-		Outil out1 = Outil.builder()
-				.date(new Date())
-				.source("file.pdf")
-				.build();
-		
-		out1 = outilService.addOutil(out1);
-	}
-	
-
 }

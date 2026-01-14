@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.bean.OutilBean;
 import com.example.demo.bean.PublicationBean;
@@ -13,12 +14,12 @@ public interface IMembreService {
 	public Membre addMembre(Membre m);
 	public void deleteMembre(Long id) ;
 	public Membre updateMembre(Membre p) ;
-	public Membre findMembre(Long id) ;
+	public Optional<Membre> findMembre(Long id) ;
 	public List<Membre> findAll();
 	
 	//Filtrage par propriété
 	public Membre findByCin(String cin);
-	public Membre findByEmail(String email);
+	public Optional<Membre> findByEmail(String email);
 	public List<Membre> findByNom(String nom);
 	
 	//recherche spécifique des étudiants

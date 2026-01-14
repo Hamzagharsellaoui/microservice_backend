@@ -2,25 +2,20 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import com.example.demo.repository.*;
+import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.bean.OutilBean;
 import com.example.demo.bean.PublicationBean;
 import com.example.demo.entity.EnseignantChercheur;
 import com.example.demo.entity.Etudiant;
 import com.example.demo.entity.Membre;
-import com.example.demo.entity.Membre_Outil;
-import com.example.demo.entity.Membre_Outil_Id;
 import com.example.demo.entity.Membre_Pub_Id;
 import com.example.demo.entity.Membre_Publication;
-import com.example.demo.proxy.OutilProxyService;
 import com.example.demo.proxy.PublicationProxyService;
-import com.example.demo.repository.EnseignantRepository;
-import com.example.demo.repository.EtudiantRepository;
-import com.example.demo.repository.MembreOutilRepository;
-import com.example.demo.repository.MembrePubRepository;
-import com.example.demo.repository.MembreRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -29,30 +24,48 @@ import lombok.AllArgsConstructor;
 public class MembreImpl implements IMembreService {
 	MembreRepository membreRepository;
 	EtudiantRepository etudiantRepository;
+	MembreOutilRepository membreOutilRepository;
+	MembreEventRepository membreEventRepository;
 	EnseignantRepository enseignantRepository;
-	
+
 	MembrePubRepository membrePubRepository;
 	PublicationProxyService publicationProxyService;
-	
-	MembreOutilRepository membreOutilRepository;
-	OutilProxyService outilProxyService;
-	
+	PasswordEncoder passwordEncoder;
+
 	public Membre addMembre(Membre m) {
-		membreRepository.save(m);
-		return m;
+
+		// ✅ encode password once
+		if (m.getPassword() != null && !m.getPassword().startsWith("$2a$") && !m.getPassword().startsWith("$2b$")) {
+			m.setPassword(passwordEncoder.encode(m.getPassword()));
+		}
+
+		Membre saved = membreRepository.save(m);
+
+		if (saved instanceof Etudiant etd) {
+			if (etd.getEncadrantId() != null) {
+				this.affecterEncadrant(etd.getId(), etd.getEncadrantId());
+			}
+		}
+		return saved;
 	}
 
+	@Transactional
 	public void deleteMembre(Long id) {
+		membrePubRepository.deleteByMembreId(id);
+		membreOutilRepository.deleteByMembreId(id);
+		membreEventRepository.deleteByMembreId(id);
+
 		membreRepository.deleteById(id);
 	}
 
 	public Membre updateMembre(Membre m) {
+		if (m.getPassword() != null && !m.getPassword().startsWith("$2a$") && !m.getPassword().startsWith("$2b$")) {
+			m.setPassword(passwordEncoder.encode(m.getPassword()));
+		}
 		return membreRepository.saveAndFlush(m);
 	}
-
-	public Membre findMembre(Long id) {
-		Membre m = (Membre) membreRepository.findById(id).get();
-		return m;
+	public Optional<Membre> findMembre(Long id) {
+		return membreRepository.findById(id);
 	}
 
 	public List<Membre> findAll() {
@@ -63,7 +76,7 @@ public class MembreImpl implements IMembreService {
 		return membreRepository.findByCin(cin);
 	}
 
-	public Membre findByEmail(String email) {
+	public Optional<Membre> findByEmail(String email) {
 		return membreRepository.findByEmail(email);
 	}
 
@@ -84,8 +97,8 @@ public class MembreImpl implements IMembreService {
 	}
 
 	public String affecterEncadrant(Long idEtd, Long idEns) {
-		Etudiant etd = (Etudiant) this.findMembre(idEtd);
-		EnseignantChercheur encadrant = (EnseignantChercheur) this.findMembre(idEns);
+		Etudiant etd = (Etudiant) this.findMembre(idEtd).get();
+		EnseignantChercheur encadrant = (EnseignantChercheur) this.findMembre(idEns).get();
 		etd.setEncadrant(encadrant);
 		this.updateMembre(etd);
 		return "Encadrant " + encadrant.getPrenom() + " " + encadrant.getNom() + " affecté avec succés à l'étudiant "
@@ -114,5 +127,5 @@ public class MembreImpl implements IMembreService {
 		});
 		return pubs;
 	}
-	
+
 }

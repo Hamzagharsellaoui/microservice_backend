@@ -38,6 +38,4 @@ public class PublicationServiceApplication implements CommandLineRunner {
 		
 		pub1 = publicationService.addPublication(pub1);
 	}
-	
-
 }

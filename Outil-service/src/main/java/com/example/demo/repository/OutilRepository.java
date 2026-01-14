@@ -10,4 +10,5 @@ import com.example.demo.entity.Outil;
 public interface OutilRepository extends JpaRepository<Outil, Long>{
 	List<Outil>findByDate(Date date);
 	List<Outil>findBySource(String source);
+	Outil findById(long id);
 }

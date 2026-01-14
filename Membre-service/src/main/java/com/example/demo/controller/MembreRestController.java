@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.example.demo.entity.Admin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,14 +30,13 @@ public class MembreRestController {
 	IMembreService membreService;
 	IMembreOutilService membreOutilService;
 	IMembreEventService membreEventService;
-
 	@RequestMapping(value = "/membres", method = RequestMethod.GET)
 	public List<Membre> findMembres() {
 		return membreService.findAll();
 	}
 
 	@GetMapping(value = "/membres/{id}")
-	public Membre findOneMemberById(@PathVariable Long id) {
+	public Optional<Membre> findOneMemberById(@PathVariable Long id) {
 		return membreService.findMembre(id);
 	}
 
@@ -46,7 +47,7 @@ public class MembreRestController {
 
 	@GetMapping(value = "/membres/search/email")
 	public Membre findOneMemberByEmail(@RequestParam String email) {
-		return membreService.findByEmail(email);
+		return membreService.findByEmail(email).get();
 	}
 
 	@PostMapping(value = "/membres/enseignant")
@@ -56,6 +57,11 @@ public class MembreRestController {
 
 	@PostMapping(value = "/membres/etudiant")
 	public Membre addMembre(@RequestBody Etudiant e) {
+		return membreService.addMembre(e);
+	}
+
+	@PostMapping(value = "/membres/admin")
+	public Membre addMembre(@RequestBody Admin e) {
 		return membreService.addMembre(e);
 	}
 
@@ -89,11 +95,13 @@ public class MembreRestController {
 	
 	@GetMapping(value = "/membres/{id}/full")
 	public Membre findAFullMember(@PathVariable(name = "id") Long id) {
-		Membre mbr = membreService.findMembre(id);
-		mbr.setOutils(membreOutilService.findAllOutilparauteur(id));
-		mbr.setPubs(membreService.findAllPublicationparauteur(id));
-		mbr.setEvents(membreEventService.findAllEventparauteur(id));
-		return mbr;
+		Optional<Membre> mbr = membreService.findMembre(id);
+		mbr.get().setOutils(membreOutilService.findAllOutilparauteur(id));
+		mbr.get().setPubs(membreService.findAllPublicationparauteur(id));
+		mbr.get().setEvents(membreEventService.findAllEventparauteur(id));
+		return mbr.get();
 	}
 	
 }
+
+

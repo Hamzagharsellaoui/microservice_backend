@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +28,9 @@ public class MembrePubController {
 	@GetMapping(value = "/membres/{m_id}/publications/{p_id}")
 	public Membre affecterPublication(@PathVariable(name = "m_id") Long m_id, @PathVariable(name = "p_id") Long p_id) {
 		membrePublicationService.affectPublicationToAuteur(m_id, p_id);
-		Membre mbr = membreService.findMembre(m_id);
-		mbr.setPubs(membrePublicationService.findAllPublicationByAuteur(m_id));
-		return mbr;
+		Optional<Membre> mbr = membreService.findMembre(m_id);
+		mbr.get().setPubs(membrePublicationService.findAllPublicationByAuteur(m_id));
+		return mbr.get();
 	}
 	
 	@GetMapping(value = "/membres/{id}/publications")

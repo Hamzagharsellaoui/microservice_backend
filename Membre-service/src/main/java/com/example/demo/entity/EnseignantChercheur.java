@@ -12,9 +12,6 @@ import lombok.NoArgsConstructor;
 @Entity @DiscriminatorValue("ens")
 @NoArgsConstructor @AllArgsConstructor
 public class EnseignantChercheur extends Membre {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@NonNull
 	private String grade;
@@ -23,10 +20,8 @@ public class EnseignantChercheur extends Membre {
 	@Builder
 	public EnseignantChercheur(Long id, String cin, String nom, String prenom, Date dateNaissance, byte[] photo,
 			String cv, String email, String password, String grade, String etablissement) {
-		super(id, cin, nom, prenom, dateNaissance, photo, cv, email, password, "ens", null, null, null);
+		super(id, cin, nom, prenom, dateNaissance, photo, cv, email, password, "ens",  null, null,null);
 		this.grade = grade;
 		this.etablissement = etablissement;
 	}
-	
-	
 }
